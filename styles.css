@@ -1,0 +1,147 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 600px;
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: #555;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+#counter-display {
+    font-size: 4em;
+    text-align: center;
+    color: #667eea;
+    font-weight: bold;
+    margin: 30px 0;
+    padding: 20px;
+    background: #f0f0f0;
+    border-radius: 10px;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 12px 24px;
+    font-size: 1em;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+#increment-btn {
+    background: #4caf50;
+    color: white;
+}
+
+#increment-btn:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+}
+
+#decrement-btn {
+    background: #f44336;
+    color: white;
+}
+
+#decrement-btn:hover {
+    background: #da190b;
+    transform: translateY(-2px);
+}
+
+#reset-btn {
+    background: #ff9800;
+    color: white;
+}
+
+#reset-btn:hover {
+    background: #e68900;
+    transform: translateY(-2px);
+}
+
+.user-input-section,
+.message-section,
+.history-section {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid #e0e0e0;
+}
+
+input[type="text"] {
+    padding: 10px;
+    font-size: 1em;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    width: calc(100% - 120px);
+    margin-right: 10px;
+}
+
+#set-btn,
+#add-message-btn {
+    background: #2196f3;
+    color: white;
+    padding: 10px 20px;
+}
+
+#set-btn:hover,
+#add-message-btn:hover {
+    background: #0b7dda;
+    transform: translateY(-2px);
+}
+
+#messages,
+#history {
+    margin-top: 15px;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    min-height: 50px;
+}
+
+.message-item,
+.history-item {
+    padding: 10px;
+    margin: 5px 0;
+    background: white;
+    border-left: 4px solid #667eea;
+    border-radius: 4px;
+}
+
+.history-item {
+    border-left-color: #4caf50;
+}

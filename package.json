@@ -1,0 +1,23 @@
+{
+  "name": "simple-counter-app",
+  "version": "1.0.0",
+  "description": "A simple counter app demonstrating XSS vulnerabilities and their fixes",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test command\" && exit 1",
+    "start": "npx http-server -p 8080",
+    "lint": "eslint *.js"
+  },
+  "keywords": [
+    "counter",
+    "xss",
+    "security",
+    "demo"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "http-server": "^14.1.1"
+  }
+}

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XSS Demo - Vulnerable vs Secure</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f0f0;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .demo-box {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .vulnerable {
+            border: 3px solid #f44336;
+        }
+        
+        .secure {
+            border: 3px solid #4caf50;
+        }
+        
+        .demo-box h2 {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ddd;
+        }
+        
+        .vulnerable h2 {
+            color: #f44336;
+        }
+        
+        .secure h2 {
+            color: #4caf50;
+        }
+        
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+        
+        .test-section h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 5px;
+        }
+        
+        .test-btn {
+            background: #2196f3;
+            color: white;
+        }
+        
+        .clear-btn {
+            background: #ff9800;
+            color: white;
+        }
+        
+        .result-area {
+            min-height: 100px;
+            padding: 15px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .warning-box {
+            background: #ffebee;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid #f44336;
+        }
+        
+        code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .payload-examples {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        
+        .payload-examples h4 {
+            margin-bottom: 10px;
+        }
+        
+        .payload-examples ul {
+            margin-left: 20px;
+        }
+        
+        .payload-examples li {
+            margin: 5px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔒 XSS Vulnerability Demonstration</h1>
+        <p>Compare Vulnerable vs Secure Implementations</p>
+    </div>
+    
+    <div class="container">
+        <!-- Vulnerable Version -->
+        <div class="demo-box vulnerable">
+            <h2>⚠️ VULNERABLE Version</h2>
+            
+            <div class="warning-box">
+                <strong>Warning:</strong> This version uses unsafe <code>innerHTML</code> and is vulnerable to XSS attacks!
+            </div>
+            
+            <div class="test-section">
+                <h3>Test 1: Message Input</h3>
+                <input type="text" id="vulnerable-msg" placeholder="Enter a message (try XSS payload)">
+                <button class="test-btn" onclick="addVulnerableMessage()">Add Message</button>
+                <button class="clear-btn" onclick="clearVulnerable()">Clear</button>
+                <div id="vulnerable-result" class="result-area"></div>
+            </div>
+            
+            <div class="payload-examples">
+                <h4>Try these XSS payloads:</h4>
+                <ul>
+                    <li>&lt;img src=x onerror=alert('XSS')&gt;</li>
+                    <li>&lt;script&gt;alert('XSS')&lt;/script&gt;</li>
+                    <li>&lt;svg onload=alert('XSS')&gt;</li>
+                    <li>&lt;iframe src="javascript:alert('XSS')"&gt;&lt;/iframe&gt;</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Secure Version -->
+        <div class="demo-box secure">
+            <h2>✅ SECURE Version</h2>
+            
+            <div class="info-box">
+                <strong>Info:</strong> This version uses safe <code>textContent</code> and is protected against XSS attacks!
+            </div>
+            
+            <div class="test-section">
+                <h3>Test 1: Message Input</h3>
+                <input type="text" id="secure-msg" placeholder="Enter a message (try XSS payload)">
+                <button class="test-btn" onclick="addSecureMessage()">Add Message</button>
+                <button class="clear-btn" onclick="clearSecure()">Clear</button>
+                <div id="secure-result" class="result-area"></div>
+            </div>
+            
+            <div class="payload-examples">
+                <h4>Security Features:</h4>
+                <ul>
+                    <li>Uses createElement() and textContent</li>
+                    <li>Automatic HTML escaping</li>
+                    <li>No innerHTML with user input</li>
+                    <li>Safe DOM manipulation</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // VULNERABLE VERSION - Uses innerHTML (UNSAFE)
+        function addVulnerableMessage() {
+            const input = document.getElementById('vulnerable-msg');
+            const result = document.getElementById('vulnerable-result');
+            const message = input.value;
+            
+            if (message) {
+                // XSS VULNERABILITY: Using innerHTML with user input
+                result.innerHTML += `<div style="padding: 10px; margin: 5px 0; background: #ffebee; border-left: 4px solid #f44336; border-radius: 4px;">${message}</div>`;
+                input.value = '';
+            }
+        }
+        
+        function clearVulnerable() {
+            document.getElementById('vulnerable-result').innerHTML = '';
+            document.getElementById('vulnerable-msg').value = '';
+        }
+        
+        // SECURE VERSION - Uses textContent (SAFE)
+        function addSecureMessage() {
+            const input = document.getElementById('secure-msg');
+            const result = document.getElementById('secure-result');
+            const message = input.value;
+            
+            if (message) {
+                // SECURE: Using createElement and textContent
+                const messageDiv = document.createElement('div');
+                messageDiv.style.cssText = 'padding: 10px; margin: 5px 0; background: #e8f5e9; border-left: 4px solid #4caf50; border-radius: 4px;';
+                messageDiv.textContent = message; // Automatically escapes HTML
+                result.appendChild(messageDiv);
+                input.value = '';
+            }
+        }
+        
+        function clearSecure() {
+            document.getElementById('secure-result').innerHTML = '';
+            document.getElementById('secure-msg').value = '';
+        }
+        
+        // Allow Enter key to submit
+        document.getElementById('vulnerable-msg').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') addVulnerableMessage();
+        });
+        
+        document.getElementById('secure-msg').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') addSecureMessage();
+        });
+    </script>
+</body>
+</html>
