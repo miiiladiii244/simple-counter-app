@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counters</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <h1>Counters</h1>
+            <div class="global-total">Total: <span id="total-count">0</span></div>
+        </header>
+
+        <main id="counter-list" class="counter-list">
+            <!-- Counters will be injected here -->
+            <div class="empty-state" id="empty-state">
+                <p>No counters yet. Tap + to add one.</p>
+            </div>
+        </main>
+
+        <button class="fab" id="fab-add" aria-label="Add Counter">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 5V19M5 12H19" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Add/Edit Counter Modal -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal">
+            <h2 id="modal-title">New Counter</h2>
+            <form id="counter-form">
+                <div class="form-group">
+                    <label for="counter-name">Name</label>
+                    <input type="text" id="counter-name" placeholder="e.g., Daily Water Glasses" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="counter-initial">Initial Value</label>
+                    <input type="number" id="counter-initial" value="0">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel" id="btn-cancel">Cancel</button>
+                    <button type="submit" class="btn-primary" id="btn-save">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Options Menu (Contextual) -->
+    <!-- This will be dynamically positioned or a bottom sheet -->
+    <div class="context-menu" id="context-menu" hidden>
+        <button class="menu-item" id="menu-rename">
+            <span class="icon">✏️</span> Rename
+        </button>
+        <button class="menu-item" id="menu-reset">
+            <span class="icon">🔄</span> Reset
+        </button>
+        <button class="menu-item text-danger" id="menu-delete">
+            <span class="icon">🗑️</span> Delete
+        </button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
