@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 </svg>
                             </button>
                         </div>
-                        <div class="count-display">${counter.value}</div>
+                        <div class="count-display">${escapeHtml(String(counter.value))}</div>
                         <div class="count-controls">
                             <button class="control-btn increment" data-id="${counter.id}" aria-label="Increment">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     menuReset.addEventListener('click', () => {
         const counter = counters.find(c => c.id === contextMenuTargetId);
-        if (counter && confirm(`Reset "${counter.name}" to 0?`)) {
+        if (counter && confirm(`Reset "${escapeHtml(counter.name)}" to 0?`)) {
             counter.value = 0;
             save();
         }
@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     menuDelete.addEventListener('click', () => {
         const counter = counters.find(c => c.id === contextMenuTargetId);
-        if (counter && confirm(`Delete "${counter.name}"?`)) {
+        if (counter && confirm(`Delete "${escapeHtml(counter.name)}"?`)) {
             counters = counters.filter(c => c.id !== contextMenuTargetId);
             save();
         }
